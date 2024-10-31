@@ -1,0 +1,23 @@
+<div>
+  <h2 mat-dialog-title>What's on your mind?</h2>
+  <div *ngIf="isLoading" class="loading-overlay">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+
+  <mat-dialog-content [class.blurred]="isLoading">
+    <form [formGroup]="writeForm">
+      <mat-form-field class="custom-width">
+        <input matInput placeholder="Say your thought..." formControlName="thoughtText" />
+      </mat-form-field>      
+      <input type="file" (change)="onFileSelected($event)" />
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-button (click)="onCancel()" [disabled]="isLoading">Cancel</button>
+    <button mat-button (click)="onSubmit()" [disabled]="isLoading">
+      <ng-container *ngIf="!isLoading">Submit</ng-container>
+      <ng-container *ngIf="isLoading">Loading...</ng-container>
+    </button>
+  </mat-dialog-actions>
+</div>
