@@ -1,5 +1,21 @@
-<div class="flex justify-center p-4 animate-fade-right">
-    <p class="text-7xl text-white archivo-black-regular break-all">
-      Do you feel <span class="text-yellow-500">{{ emotions[currentEmotionIndex] }}?</span>
+<div class="p-4 sm:ml-64">
+  <div class="flex flex-col items-center justify-center p-4 animate-fade-right">
+    <div>
+      <p class="text-4xl lg:text-7xl md:text-2xl text-white archivo-black-regular">
+        Do you feel <span class="text-yellow-500">{{ emotions[currentEmotionIndex] }}?</span>
+      </p>
+    </div>
+    <p class="text-2xl lg:text-4xl text-white archivo-black-regular">
+      Let your emotions be heard through texts and photos. 
     </p>
-  </div>  
+
+    <video class="mt-4 w-full lg:w-3/4 rounded-lg" controls>
+      <source src="lflix-video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    
+    <p class="text-base text-white archivo-black-regular p-5">
+      All negative posts will be deleted.
+    </p>
+  </div>
+</div>

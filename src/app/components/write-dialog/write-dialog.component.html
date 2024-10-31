@@ -8,7 +8,8 @@
     <form [formGroup]="writeForm">
       <mat-form-field class="custom-width">
         <input matInput placeholder="Say your thought..." formControlName="thoughtText" />
-      </mat-form-field>      
+      </mat-form-field>
+      <p class="text-black text-base">You may upload a photo (optional)</p>    
       <input type="file" (change)="onFileSelected($event)" />
     </form>
   </mat-dialog-content>
