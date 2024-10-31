@@ -15,7 +15,7 @@ export class SidebarComponent {
   openDialog(): void {
     this.dialog.open(WriteDialogComponent, {
       width: '400px',
-      data: {} // Pass data if needed
+      data: {}
     });
   }
 }
