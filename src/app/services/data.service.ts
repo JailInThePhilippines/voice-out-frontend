@@ -7,7 +7,7 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class DataService {
-  private apiUrl = 'https://voiceout-app-backend-wpfp.onrender.com/api';
+  private apiUrl = 'http://localhost:3000/api';
   private socket: WebSocket | null = null;
   public newVoiceOut$ = new Subject<any>();
 
@@ -30,8 +30,8 @@ export class DataService {
   }
 
   // GET request to fetch all voice outs
-  getVoiceOuts(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/getVoiceOuts`);
+  getVoiceOuts(page: number = 1, limit: number = 10): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/getVoiceOuts?page=${page}&limit=${limit}`);
   }
 
   // DELETE request to delete a voice out by ID
@@ -48,7 +48,7 @@ export class DataService {
   initWebSocket(): void {
     if (isPlatformBrowser(this.platformId)) {
       // Check if we're in the browser
-      this.socket = new WebSocket('wss://voiceout-app-backend-wpfp.onrender.com/api');
+      this.socket = new WebSocket('ws://localhost:3000/api');
 
       this.socket.onmessage = (event) => {
         const message = JSON.parse(event.data);
