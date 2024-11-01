@@ -53,3 +53,21 @@
        </ul>
     </div>
  </aside>
+
+ <div class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bottom-2 left-1/2 md:hidden">
+   <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
+       <div class="flex items-center justify-center">
+           <button (click)="openDialog()" data-tooltip-target="tooltip-new" type="button" class="inline-flex items-center justify-center w-10 h-10 font-medium bg-gray-600 rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800">
+            <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21h3.75L19.75 8.25a1 1 0 0 0 0-1.414l-2.586-2.586a1 1 0 0 0-1.414 0L3 16.75V21zM14.25 6.25l3.5 3.5"/>
+           </svg>
+           
+               <span class="sr-only">New item</span>
+           </button>
+       </div>
+       <div id="tooltip-new" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+           Write a thought...
+           <div class="tooltip-arrow" data-popper-arrow></div>
+       </div>
+   </div>
+</div>
