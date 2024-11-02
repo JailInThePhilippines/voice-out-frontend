@@ -20,8 +20,8 @@
           {{ voiceout.voice_out }}
         </p>
         <p class="mb-3 mt-2 text-base font-normal text-gray-700 dark:text-gray-500">
-          {{ voiceout.date | date: 'MM-dd-yyyy' }}
-        </p>        
+          {{ voiceout.date | date: 'MM-dd-yyyy, hh:mm a' : 'Asia/Manila' }}
+        </p>               
       </div>
     </div>
   </div>

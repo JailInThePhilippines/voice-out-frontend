@@ -55,14 +55,14 @@ export class VoicesComponent implements OnInit, OnDestroy {
   }
 
   getVoices(): void {
-    this.loading = true; // Start loading
+    this.loading = true;
     this.dataService.getVoiceOuts().subscribe({
       next: (voices) => {
         this.voices = voices;
-        this.loading = false; // Stop loading
+        this.loading = false;
       },
       error: () => {
-        this.loading = false; // Stop loading on error
+        this.loading = false;
       }
     });
   }
