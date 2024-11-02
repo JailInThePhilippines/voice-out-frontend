@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { FlowbiteService } from '../../services/flowbite.service';
 import { Subscription } from 'rxjs';
@@ -26,12 +26,8 @@ export class VoicesComponent implements OnInit, OnDestroy {
   voices: Voices[] = [];
   private newVoiceOutSub: Subscription | null = null;
   loading: boolean = true;
-  loadingMore: boolean = false;
   showSuccessToast = false;
   showErrorToast = false;
-  page: number = 1;
-  limit: number = 10;
-  hasMore: boolean = true;
 
   constructor(private dataService: DataService, private flowbiteService: FlowbiteService, private dialog: MatDialog, private toastService: ToastService) {}
 
@@ -58,35 +54,17 @@ export class VoicesComponent implements OnInit, OnDestroy {
     });
   }
 
-  getVoices(page: number = 1, limit: number = 10): void {
-    this.loading = page === 1;
-    this.loadingMore = page > 1;
-    this.dataService.getVoiceOuts(page, limit).subscribe({
+  getVoices(): void {
+    this.loading = true; // Start loading
+    this.dataService.getVoiceOuts().subscribe({
       next: (voices) => {
-        this.voices = [...this.voices, ...voices];
-        this.loading = false;
-        this.loadingMore = false;
-        this.hasMore = voices.length === this.limit;
+        this.voices = voices;
+        this.loading = false; // Stop loading
       },
       error: () => {
-        this.loading = false;
-        this.loadingMore = false;
-        this.hasMore = false;
+        this.loading = false; // Stop loading on error
       }
     });
-  }
-
-  loadMore(): void {
-    if (!this.hasMore || this.loading) return;
-    this.page += 1;
-    this.getVoices(this.page, this.limit);
-  }
-
-  @HostListener("window:scroll", [])
-  onWindowScroll(): void {
-    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 200) {
-      this.loadMore();
-    }
   }
 
   ngOnDestroy(): void {

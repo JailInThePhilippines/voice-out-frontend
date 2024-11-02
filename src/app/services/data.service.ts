@@ -30,8 +30,8 @@ export class DataService {
   }
 
   // GET request to fetch all voice outs
-  getVoiceOuts(page: number = 1, limit: number = 10): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/getVoiceOuts?page=${page}&limit=${limit}`);
+  getVoiceOuts(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/getVoiceOuts`);
   }
 
   // DELETE request to delete a voice out by ID
