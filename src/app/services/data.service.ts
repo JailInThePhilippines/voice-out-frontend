@@ -7,7 +7,7 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class DataService {
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = 'https://voiceout-app-backend-wpfp.onrender.com/api';
   private socket: WebSocket | null = null;
   public newVoiceOut$ = new Subject<any>();
 
@@ -48,7 +48,7 @@ export class DataService {
   initWebSocket(): void {
     if (isPlatformBrowser(this.platformId)) {
       // Check if we're in the browser
-      this.socket = new WebSocket('ws://localhost:3000/api');
+      this.socket = new WebSocket('wss://voiceout-app-backend-wpfp.onrender.com/api');
 
       this.socket.onmessage = (event) => {
         const message = JSON.parse(event.data);
