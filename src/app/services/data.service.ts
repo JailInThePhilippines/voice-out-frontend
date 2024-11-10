@@ -7,7 +7,7 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class DataService {
-  private apiUrl = 'https://voiceout-app-backend-wpfp.onrender.com/api';
+  private apiUrl = 'http://localhost:3000/api';
   private socket: WebSocket | null = null;
   public newVoiceOut$ = new Subject<any>();
 
@@ -21,13 +21,13 @@ export class DataService {
   }
 
   // POST request to add a new voice out
-  postVoiceOut(voiceOut: string, photo?: File): Observable<any> {
+  postVoiceOut(voiceOut: string, file?: File): Observable<any> {
     const formData = new FormData();
     formData.append('voice_out', voiceOut);
-    if (photo) formData.append('photo', photo);
-
+    if (file) formData.append('file', file);
+  
     return this.http.post(`${this.apiUrl}/postVoiceOut`, formData);
-  }
+  }  
 
   // GET request to fetch all voice outs
   getVoiceOuts(): Observable<any[]> {
@@ -48,7 +48,7 @@ export class DataService {
   initWebSocket(): void {
     if (isPlatformBrowser(this.platformId)) {
       // Check if we're in the browser
-      this.socket = new WebSocket('wss://voiceout-app-backend-wpfp.onrender.com/api');
+      this.socket = new WebSocket('ws://localhost:3000/api');
 
       this.socket.onmessage = (event) => {
         const message = JSON.parse(event.data);

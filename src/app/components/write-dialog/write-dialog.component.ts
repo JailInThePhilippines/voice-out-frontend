@@ -15,7 +15,15 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   standalone: true,
   templateUrl: './write-dialog.component.html',
   styleUrls: ['./write-dialog.component.css'],
-  imports: [MatDialogModule, MatFormFieldModule, MatInputModule, MatButtonModule, ReactiveFormsModule, NgIf, MatProgressSpinnerModule]
+  imports: [
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    NgIf,
+    MatProgressSpinnerModule,
+  ],
 })
 export class WriteDialogComponent {
   writeForm: FormGroup;
@@ -29,13 +37,13 @@ export class WriteDialogComponent {
   ) {
     this.writeForm = this.fb.group({
       thoughtText: [''],
-      photo: [null]
+      file: [null],
     });
   }
 
   onFileSelected(event: Event): void {
     const file = (event.target as HTMLInputElement).files?.[0] || null;
-    this.writeForm.patchValue({ photo: file });
+    this.writeForm.patchValue({ file });
   }
 
   onCancel(): void {
@@ -45,22 +53,19 @@ export class WriteDialogComponent {
   onSubmit(): void {
     if (this.writeForm.valid) {
       this.isLoading = true;
-      const { thoughtText, photo } = this.writeForm.value;
-      
-      this.dataService.postVoiceOut(thoughtText, photo).subscribe({
+      const { thoughtText, file } = this.writeForm.value;
+
+      this.dataService.postVoiceOut(thoughtText, file).subscribe({
         next: () => {
-          //console.log('Voice out posted successfully');
           this.isLoading = false;
-          this.toastService.showSuccess(); 
+          this.toastService.showSuccess();
           this.dialogRef.close();
         },
-        error: (error) => {
-          //console.error('Error posting voice out:', error);
-          this.isLoading = false; 
+        error: () => {
+          this.isLoading = false;
           this.toastService.showError();
-        }
+        },
       });
     }
   }
-  
 }

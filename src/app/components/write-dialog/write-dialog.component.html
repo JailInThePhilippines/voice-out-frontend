@@ -7,15 +7,23 @@
   <mat-dialog-content [class.blurred]="isLoading">
     <form [formGroup]="writeForm">
       <mat-form-field class="custom-width">
-        <input matInput placeholder="Say your thought..." formControlName="thoughtText" />
+        <input
+          matInput
+          placeholder="Say your thought..."
+          formControlName="thoughtText"
+        />
       </mat-form-field>
-      <p class="text-black text-base">You may upload a photo (optional)</p>    
+      <p class="text-black text-base">
+        You may upload a media file (photo, audio, video, etc.)
+      </p>
       <input type="file" (change)="onFileSelected($event)" />
     </form>
   </mat-dialog-content>
 
   <mat-dialog-actions>
-    <button mat-button (click)="onCancel()" [disabled]="isLoading">Cancel</button>
+    <button mat-button (click)="onCancel()" [disabled]="isLoading">
+      Cancel
+    </button>
     <button mat-button (click)="onSubmit()" [disabled]="isLoading">
       <ng-container *ngIf="!isLoading">Submit</ng-container>
       <ng-container *ngIf="isLoading">Loading...</ng-container>
