@@ -1,0 +1,21 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-900">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
+      <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Enter Passcode</h2>
+      <input 
+        [(ngModel)]="passcode" 
+        type="text" 
+        maxlength="8" 
+        placeholder="Enter 4-digit passcode"
+        class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 mb-4 text-center text-lg"
+      />
+      <button 
+        (click)="authorize()" 
+        class="w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        Submit
+      </button>
+      <div *ngIf="passcode && passcode.length === 4 && passcode !== '1234'" class="text-red-500 text-sm text-center mt-2">
+        Incorrect passcode!
+      </div>
+    </div>
+  </div>
+  
